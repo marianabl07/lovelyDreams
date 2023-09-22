@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=News+Cycle:wght@400;700&display=swap');
+
+:root {
+    --peach: #FFB9B9;
+    --beige: #FFDDD2;
+    --light-pink: #FFACC7;
+    --pink: #FF8DC7;
+    --white: #FFFFFF;
+    --black: #000000;
+    --sm: 14px;
+    --md: 16px;
+    --lg: 18px;
+}
+
+header {
+    font-family: 'Acme', sans-serif;
+}
+
+body {
+    font-family: 'Acme', sans-serif;
+    overflow-x: hidden;
+    background-color: var(--peach);
+}
+
+#menu li > a {
+    font-size: var(--lg);
+    font-weight: bold;
+    color: var(--pink);
+}
+
+#menu form > button {
+    font-size: var(--lg);
+    font-weight: bold;
+}
+
+.carousel-inner {
+    max-height: 100%;
+    
+}
+
+footer {
+    background: var(--peach);
+    min-height: 100px;
+}
+
+footer p {
+    color: var(--white) ;
+    text-align: center;
+}
+
+#icons i {
+    font-size: 26px;
+    padding: 0 8px;
+    color: var(--white);
+}
+
+#contactUs {
+    color: var(--white);
+}
+
+
+
+@media (max-width: 768px) {
+    #intro {
+        width: 90% !important;
+    }
+}
