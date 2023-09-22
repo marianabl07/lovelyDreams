@@ -40,6 +40,9 @@ body {
 
 #slide-text {
     color: var(--black);
+    background-color: var(--peach);
+    
+
 }
 
 footer {
