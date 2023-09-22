@@ -38,6 +38,10 @@ body {
     
 }
 
+#slide-text {
+    color: var(--black);
+}
+
 footer {
     background: var(--peach);
     min-height: 100px;
