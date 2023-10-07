@@ -54,7 +54,7 @@ body {
     font-size: var(--sm);
     text-align: center;
     text-decoration: none;
-    margin-bottom: 52px;
+    margin-bottom: 100px;
 }
 
 .label {
@@ -104,6 +104,24 @@ body {
 .login-button {
     margin-top: 14px;
     margin-bottom: 30px;
+}
+
+.invalid {
+    border: solid 1px red;
+    box-shadow: 0 0 10px red;
+}
+.correct {
+    border: solid 1px greenyellow;
+    box-shadow: 0 0 10px greenyellow;
+}
+
+.warnings {
+    font-size: var(--sm);
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    color: var(--pink);
+    padding-top: 20px;
 }
 
 @media (max-width: 640px) {

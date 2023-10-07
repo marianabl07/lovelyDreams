@@ -79,6 +79,8 @@ body {
     margin-bottom: 22px;
 }
 
+
+
 .primary-button {
     background-color: var(--light-pink);
     border-radius: 8px;
@@ -94,6 +96,36 @@ body {
 .logup-button {
     margin-top: 14px;
     margin-bottom: 30px;
+}
+
+.form-input-error {
+    font-size: 12px;
+    color: var(--pink);
+	margin-bottom: 8px;
+	display: none;
+}
+
+.form-input-error-active {
+    display: block;
+}
+
+.invalid {
+    border: solid 1px red;
+    box-shadow: 0 0 10px red;
+}
+.correct {
+    border: solid 1px greenyellow;
+    box-shadow: 0 0 10px greenyellow;
+}
+
+.form-successful {
+    font-size: 14px;
+	color: #119200;
+	display: none;
+}
+
+.form-successful-active {
+    display: block;
 }
 
 @media (max-width: 640px) {
