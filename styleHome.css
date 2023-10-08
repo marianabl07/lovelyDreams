@@ -32,7 +32,6 @@ body {
     right: 60px;
     background-color: var(--white);
     border: 1px solid #ccc;
-    background-color: #fff;
     max-width: 300px;
     margin: 20px auto;
     padding: 10px;
@@ -41,8 +40,10 @@ body {
 }
 
 #cart-list {
+    background-color: var(--white);
     list-style: none;
     padding: 0;
+    
 }
 
 #cart-list li {

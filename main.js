@@ -63,7 +63,7 @@ productList.push({
 });
 
 
-function renderProducts(arr) {
+function renderProducts(productList) {
 for (let i = 0; i < productList.length; i++) {
 
 const row = document.getElementById('row');
