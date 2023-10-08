@@ -58,6 +58,7 @@ productList.push({
 function renderProducts(arr) {
 for (let i = 0; i < productList.length; i++) {
 
+const row = document.getElementById('row');
 // Crear el elemento <div> con la clase "col mb-5"
 const col = document.createElement("div");
 col.className = "col mb-5 products";
@@ -108,7 +109,7 @@ addToCartButton.addEventListener("click", () => {
     price: productList[i].price,
     image: productList[i].image,
     };
-    
+
 cart.push(productToAdd);
 
 // Actualizar el contador del carrito
