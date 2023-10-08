@@ -56,18 +56,7 @@ productList.push({
 
 
 function renderProducts(arr) {
-    for (let i = 0; i < productList.length; i++) {
-// Crear el elemento <section> con la clase "py-5"
-const section = document.createElement("section");
-section.className = "py-5";
-
-// Crear el elemento <div> con la clase "container px-4 px-lg-5 mt-5"
-const container = document.createElement("div");
-container.className = "container px-4 px-lg-5 mt-5";
-
-// Crear el elemento <div> con la clase "row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center card-item"
-const row = document.createElement("div");
-row.className = "row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center card-item";
+for (let i = 0; i < productList.length; i++) {
 
 // Crear el elemento <div> con la clase "col mb-5"
 const col = document.createElement("div");
@@ -119,6 +108,7 @@ addToCartButton.addEventListener("click", () => {
     price: productList[i].price,
     image: productList[i].image,
     };
+    
 cart.push(productToAdd);
 
 // Actualizar el contador del carrito
@@ -207,11 +197,11 @@ card.appendChild(cardFooter);
 
 col.appendChild(card);
 row.appendChild(col);
-container.appendChild(row);
-section.appendChild(container);
+
+
 
 // Agregar el elemento <section> al DOM (por ejemplo, al cuerpo del documento)
-document.body.insertBefore(section, footer);
+
 
     }
 }
