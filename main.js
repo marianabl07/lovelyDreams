@@ -200,10 +200,6 @@ col.appendChild(card);
 row.appendChild(col);
 
 
-
-// Agregar el elemento <section> al DOM (por ejemplo, al cuerpo del documento)
-
-
     }
 }
 
