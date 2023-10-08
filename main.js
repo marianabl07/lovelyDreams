@@ -9,49 +9,57 @@ const productList = [];
 productList.push({
     name: 'Ref. 2057',
     price: 35000,
-    image: './imagenes/IMG_20230917_175317.jpg'
+    image: './imagenes/IMG_20230917_175317.jpg',
+    description: 'cool nightgown made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2155',
     price: 39000,
-    image: './imagenes/IMG_20230917_175502.jpg'
+    image: './imagenes/IMG_20230917_175502.jpg',
+    description: 'cool short pajama made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2058',
     price: 28000,
-    image: './imagenes/IMG_20230917_180125.jpg'
+    image: './imagenes/IMG_20230917_180125.jpg',
+    description: 'cool nightgown made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2255',
     price: 40000,
-    image: './imagenes/IMG_20230917_175953.jpg'
+    image: './imagenes/IMG_20230917_175953.jpg',
+    description: 'cool short pajama made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2256',
     price: 45000,
-    image: './imagenes/IMG_20230917_180434.jpg'
+    image: './imagenes/IMG_20230917_180434.jpg',
+    description: 'cool short pajama made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2156',
     price: 40000,
-    image: './imagenes/IMG_20230917_180619.jpg'
+    image: './imagenes/IMG_20230917_180619.jpg',
+    description: 'cool short pajama made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2059',
     price: 40000,
-    image: './imagenes/IMG_20230917_180302.jpg'
+    image: './imagenes/IMG_20230917_180302.jpg',
+    description: 'cool nightgown made of cotton'
 });
 
 productList.push({
     name: 'Ref. 2257',
     price: 40000,
-    image: './imagenes/IMG_20230917_175752.jpg'
+    image: './imagenes/IMG_20230917_175752.jpg',
+    description: 'cool short pajama made of cotton'
 });
 
 
@@ -86,6 +94,11 @@ productName.textContent = "Sale item";
 const productRef = document.createElement("h6");
 productRef.innerText = productList[i].name;
 productRef.className = "card-title";
+
+//Crear la descripción del producto
+const productDescription = document.createElement('h6');
+productDescription.innerText = 'Description:' + " " + productList[i].description;
+productDescription.className = 'card-description';
 
 
 // Crear el precio del producto
@@ -182,19 +195,21 @@ const buyButton = document.querySelector(".btn-pay");
 buyButton.addEventListener("click", () => {
     // Aquí puedes implementar la lógica para finalizar la compra,
     // como enviar los productos seleccionados al servidor o mostrar un mensaje de éxito.
-    alert("Compra realizada. Funcionalidad de pago real no implementada.");
+    alert("Purchase made. Actual payment functionality not implemented.");
 });
 
 // Agregar todos los elementos en el orden correcto
 cardBody.appendChild(productName);
 cardBody.appendChild(productRef);
 cardBody.appendChild(productPrice);
+cardBody.appendChild(productDescription);
 
 cardFooter.appendChild(addToCartButton);
 
 card.appendChild(productImage);
 card.appendChild(cardBody);
 card.appendChild(cardFooter);
+
 
 col.appendChild(card);
 row.appendChild(col);
