@@ -26,6 +26,7 @@ body {
 }
 
 .cart-container {
+    position: absolute;
     display: none; 
     top: 60px;
     right: 60px;
@@ -97,6 +98,12 @@ footer p {
 
 #contactUs {
     color: var(--white);
+}
+
+
+#cartPurchase {
+    max-height: 300px;
+    overflow: auto;
 }
 
 
