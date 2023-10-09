@@ -26,8 +26,7 @@ body {
 }
 
 .cart-container {
-    display: none;
-    position:absolute; 
+    display: none; 
     top: 60px;
     right: 60px;
     background-color: var(--white);

@@ -46,34 +46,38 @@ const validateForm = (e) => {
    }
 }
 
+
 const validateField = (expression, input, field) => {
-    if(expression.test(input.value)){
-        document.getElementById(`${field}`).classList.remove('invalid');
-        document.getElementById(`${field}`).classList.add('correct');
-        //document.querySelector(`#group-${field}.form-input-error`).classList.remove('form-input-error-active');
-        field[field]= true;
-        
-    } else{
-        document.getElementById(`${field}`).classList.add('invalid');
-        document.getElementById(`${field}`).classList.remove('correct');
-        //document.querySelector(`#group-${field}.form-input-error`).classList.add('form-input-error-active');
-        field[field]= false;
-    }
-}
+            const errorElement = document.querySelector(`#${field} + .form-input-error`);
+
+            if(expression.test(input.value)) {
+                document.getElementById(`${field}`).classList.remove('invalid');
+                document.getElementById(`${field}`).classList.add('correct');
+                errorElement.style.display = 'none'; // Oculta el mensaje de error
+                field[field] = true;
+
+            } else {
+                document.getElementById(`${field}`).classList.add('invalid');
+                document.getElementById(`${field}`).classList.remove('correct');
+                errorElement.style.display = 'block'; // Muestra el mensaje de error
+                field[field] = false;
+            }
+        }
 
 const validatePassword = () => {
-    const inputPassword1 = document.getElementById('password');
-    const inputPassword2 = document.getElementById('confirm-password');
+const inputPassword1 = document.getElementById('password');
+const inputPassword2 = document.getElementById('confirm-password');
+const errorElement = document.querySelector('#confirm-password + .form-input-error');
 
-    if(inputPassword1.value !== inputPassword2.value){
-        document.getElementById(`confirm-password`).classList.add('invalid');
-        document.getElementById(`confirm-password`).classList.remove('correct');
-        //document.querySelector(`#group-password2.form-input-error`).classList.add('form-input-error-active');
+    if (inputPassword1.value !== inputPassword2.value) {
+        document.getElementById('confirm-password').classList.add('invalid');
+        document.getElementById('confirm-password').classList.remove('correct');
+        errorElement.style.display = 'block'; // Muestra el mensaje de error
         field['password'] = false;
     } else {
-        document.getElementById(`confirm-password`).classList.remove('invalid');
-        document.getElementById(`confirm-password`).classList.add('correct');
-        //document.querySelector(`#group-password2.form-input-error`).classList.remove('form-input-error-active');
+        document.getElementById('confirm-password').classList.remove('invalid');
+        document.getElementById('confirm-password').classList.add('correct');
+        errorElement.style.display = 'none'; // Oculta el mensaje de error
         field['password'] = true;
     }
 }
@@ -85,14 +89,15 @@ inputs.forEach((input) => {
 
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if(field.name && field.lastname && field.email && field.password && field.address) {
-        form.reset();
-        
-        document.getElementById('form-successful').classList.add('form-succesful-active');
-        setTimeout(() => {
-            document.getElementById('form-successful').classList.remove('form-succesful-active');
-        }, 5000);
-    }
+        e.preventDefault();
+        if (field.password) {
+            form.reset();
 
-});
+                // Mostrar el mensaje de éxito al dar clic en el botón "Log up"
+                document.getElementById('form-successful').classList.add('form-successful-active');
+                setTimeout(() => {
+                    document.getElementById('form-successful').classList.remove('form-successful-active');
+                }, 5000);
+            }
+        });
+
