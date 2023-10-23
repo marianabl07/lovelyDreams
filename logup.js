@@ -47,20 +47,20 @@ const validateForm = (e) => {
 }
 
 
-const validateField = (expression, input, field) => {
-            const errorElement = document.querySelector(`#${field} + .form-input-error`);
-
+const validateField = (expression, input, fieldValidate) => {
+            const errorElement = document.querySelector(`#${fieldValidate} + .form-input-error`);
+            debugger;
             if(expression.test(input.value)) {
-                document.getElementById(`${field}`).classList.remove('invalid');
-                document.getElementById(`${field}`).classList.add('correct');
+                document.getElementById(`${fieldValidate}`).classList.remove('invalid');
+                document.getElementById(`${fieldValidate}`).classList.add('correct');
                 errorElement.style.display = 'none'; // Oculta el mensaje de error
-                field[field] = true;
+                field[fieldValidate] = true;
 
             } else {
-                document.getElementById(`${field}`).classList.add('invalid');
-                document.getElementById(`${field}`).classList.remove('correct');
+                document.getElementById(`${fieldValidate}`).classList.add('invalid');
+                document.getElementById(`${fieldValidate}`).classList.remove('correct');
                 errorElement.style.display = 'block'; // Muestra el mensaje de error
-                field[field] = false;
+                field[fieldValidate] = false;
             }
         }
 
@@ -90,7 +90,7 @@ inputs.forEach((input) => {
 
 form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (field.password) {
+        if (field.password && field.address && field.name && field.lastname && field.email) {
             form.reset();
 
                 // Mostrar el mensaje de éxito al dar clic en el botón "Log up"
