@@ -14,6 +14,7 @@ import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png'
 const HomePage = () => {
     const [cart, setCart] = useState([]);
     const [cartCount, setCartCount] = useState(0);
+    const [purchaseSuccess, setPurchaseSuccess] = useState(false);
 
     const productList = [
         {
@@ -73,6 +74,24 @@ const HomePage = () => {
         setCartCount(updatedCart.length);
     };
 
+    const removeFromCart = (index) => {
+        const updatedCart = [...cart];
+        updatedCart.splice(index, 1);
+        setCart(updatedCart);
+        setCartCount(updatedCart.length);
+    };
+
+    const calculateTotalPrice = () => {
+        return cart.reduce((total, product) => total + product.price, 0);
+    };
+
+    // Función para finalizar la compra y mostrar un modal de compra exitosa
+    const finalizePurchase = () => {
+        // Puedes personalizar el mensaje de compra exitosa según tus necesidades.
+        // Este es un ejemplo básico que muestra un modal de Bootstrap.
+        setPurchaseSuccess(true);
+    
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="menu">
@@ -106,7 +125,53 @@ const HomePage = () => {
                     </div>
                   </nav>
                  </div> 
+                   <form class="d-flex">
+                    <button class="btn btn-outline-danger" type="submit">
+                        <i class="bi bi-cart-fill me-1"></i>
+                        Cart
+                        <span id="cart-count" class="badge bg-danger text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </form>
+                {/* Carrito de compra */}
+            <section className="max-height-350 cart-container">
+                <div className="max-height-350 py-5" id="cartPurchase">
+                    <h2>Cart</h2>
+                    <ul id="cart-list">
+                        {cart.length === 0 ? (
+                            <li>Cart is empty</li>
+                        ) : (
+                            cart.map((product, index) => (
+                                <li key={index}>
+                                    <img src={product.image} alt={product.name} width="50" height="50" />
+                                    <span>{product.name}</span>
+                                    <span className="cart-price">${product.price.toFixed(2)}</span>
+                                    <button className="remove-from-cart btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>Remove</button>
+                                </li>
+                            ))
+                        )}
+                    </ul>
+                    <div id="total-price">Total: ${calculateTotalPrice().toFixed(2)}</div>
+                    <button className="btn-pay" onClick={finalizePurchase}>Buy <i className="fa-solid fa-bag-shopping"></i></button>
+                </div>
+            </section>
+           <div>
+           <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-user" style="color: #a6075c;"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Account</a></li>
+                            <li><a class="dropdown-item" href="#!">Cart</a></li>
+                            <li><a class="dropdown-item" href="#!">Shopping history</a></li>
+                            <li><a class="dropdown-item" href="#!">Settings</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+           </div>
+           
             </nav>
+          
 
 
             {/* Encabezado */}
@@ -143,28 +208,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Carrito de compra */}
-            <section className="max-height-350 cart-container">
-                <div className="max-height-350 py-5" id="cartPurchase">
-                    <h2>Cart</h2>
-                    <ul id="cart-list">
-                        {cart.length === 0 ? (
-                            <li>Cart is empty</li>
-                        ) : (
-                            cart.map((product, index) => (
-                                <li key={index}>
-                                    <img src={product.image} alt={product.name} width="50" height="50" />
-                                    <span>{product.name}</span>
-                                    <span className="cart-price">${product.price.toFixed(2)}</span>
-                                    <button className="remove-from-cart btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>Remove</button>
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                    <div id="total-price">Total: ${calculateTotalPrice().toFixed(2)}</div>
-                    <button className="btn-pay" onClick={finalizePurchase}>Buy <i className="fa-solid fa-bag-shopping"></i></button>
-                </div>
-            </section>
+            
 
             {/* Pie de página */}
             <footer id="footer" className="w-100 d-flex align-items justify-content-center flex-wrap">
@@ -177,6 +221,24 @@ const HomePage = () => {
                 </div>
                 <div className="fs-5 px-3 pt-3" id="contactUs">Contact us (+57) 311-404-1549</div>
             </footer>
+
+            {/* Modal de compra exitosa */}
+            <div className={`modal fade ${purchaseSuccess ? 'show' : ''}`} id="purchaseSuccessModal" tabIndex="-1" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="purchaseSuccessModalLabel">Compra Exitosa</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setPurchaseSuccess(false)}></button>
+                        </div>
+                        <div className="modal-body">
+                            ¡Gracias por tu compra! Tu pedido ha sido procesado con éxito.
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => setPurchaseSuccess(false)}>Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
