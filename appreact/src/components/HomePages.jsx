@@ -67,7 +67,6 @@ const HomePage = () => {
         }
     ];
 
-    // Función para agregar un producto al carrito
     const addToCart = (product) => {
         const updatedCart = [...cart, product];
         setCart(updatedCart);
@@ -85,32 +84,30 @@ const HomePage = () => {
         return cart.reduce((total, product) => total + product.price, 0);
     };
 
-    // Función para finalizar la compra y mostrar un modal de compra exitosa
     const finalizePurchase = () => {
-        // Puedes personalizar el mensaje de compra exitosa según tus necesidades.
-        // Este es un ejemplo básico que muestra un modal de Bootstrap.
         setPurchaseSuccess(true);
-    
-    }
+    };
+
     return (
         <div>
+            {/* ... (Navbar y encabezado) */}
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="menu">
                 <div className="container px-4 px-lg-5">
                     <a className="navbar-brand" href="#!">
                         <img src={LovelyDreamsLogo} alt="logo" width="70" height="70" />
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                    <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <li className="nav-item"><a className="nav-link active" aria-current="page" href="#!">Home</a></li>
+                            <li className="nav-item"><a className="nav-link" href="#!">About</a></li>
+                            <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a className="dropdown-item" href="#!">All Products</a></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><a className="dropdown-item" href="#!">Popular Items</a></li>
+                                    <li><a className="dropdown-item" href="#!">New Arrivals</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -125,11 +122,11 @@ const HomePage = () => {
                     </div>
                   </nav>
                  </div> 
-                   <form class="d-flex">
-                    <button class="btn btn-outline-danger" type="submit">
-                        <i class="bi bi-cart-fill me-1"></i>
+                   <form className="d-flex">
+                    <button className="btn btn-outline-danger" type="submit">
+                        <i className="bi bi-cart-fill me-1"></i>
                         Cart
-                        <span id="cart-count" class="badge bg-danger text-white ms-1 rounded-pill">0</span>
+                        <span id="cart-count" className="badge bg-danger text-white ms-1 rounded-pill">0</span>
                     </button>
                 </form>
                 {/* Carrito de compra */}
@@ -154,21 +151,21 @@ const HomePage = () => {
                     <button className="btn-pay" onClick={finalizePurchase}>Buy <i className="fa-solid fa-bag-shopping"></i></button>
                 </div>
             </section>
-           <div>
-           <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-user" style="color: #a6075c;"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Account</a></li>
-                            <li><a class="dropdown-item" href="#!">Cart</a></li>
-                            <li><a class="dropdown-item" href="#!">Shopping history</a></li>
-                            <li><a class="dropdown-item" href="#!">Settings</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Logout</a></li>
+           
+           <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa-regular fa-user" style={{color: '#a6075c'}}></i></a>
+                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a className="dropdown-item" href="#!">Account</a></li>
+                            <li><a className="dropdown-item" href="#!">Cart</a></li>
+                            <li><a className="dropdown-item" href="#!">Shopping history</a></li>
+                            <li><a className="dropdown-item" href="#!">Settings</a></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <li><a className="dropdown-item" href="#!">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
-           </div>
+           
            
             </nav>
           
@@ -208,8 +205,26 @@ const HomePage = () => {
                 </div>
             </section>
 
-            
+            {/* Carrito de compra */}
+            <section className="max-height-350 cart-container">
+                <div className={`max-height-350 py-5 ${cart.length > 0 ? 'show' : 'hide'}`} id="cartPurchase">
+                    <h2>Cart</h2>
+                    <ul id="cart-list">
+                        {cart.map((product, index) => (
+                            <li key={index}>
+                                <img src={product.image} alt={product.name} width="50" height="50" />
+                                <span>{product.name}</span>
+                                <span className="cart-price">${product.price.toFixed(2)}</span>
+                                <button className="remove-from-cart btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>Remove</button>
+                            </li>
+                        ))}
+                    </ul>
+                    <div id="total-price">Total: ${calculateTotalPrice().toFixed(2)}</div>
+                    <button className="btn-pay" onClick={finalizePurchase}>Buy <i className="fa-solid fa-bag-shopping"></i></button>
+                </div>
+            </section>
 
+            {/* ... (Pie de página) */}
             {/* Pie de página */}
             <footer id="footer" className="w-100 d-flex align-items justify-content-center flex-wrap">
                 <p className="fs-5 px-3 pt-3">lovely dreams &copy; All Rights Reserved 2023</p>
@@ -244,3 +259,9 @@ const HomePage = () => {
 }
 
 export default HomePage;
+
+
+
+
+
+

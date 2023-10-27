@@ -3,11 +3,6 @@ import '../styles/styleLogup.css';
 import 'bootstrap';
 
 
-
-
-
-
-
 const Logup = () => {
   const [form, setForm] = useState({
     name: '',
@@ -76,6 +71,7 @@ const Logup = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log("l")
     e.preventDefault();
 
     if (Object.values(field).every((value) => value)) {
