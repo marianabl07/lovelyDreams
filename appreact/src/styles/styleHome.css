@@ -25,6 +25,25 @@ body {
     color: var(--pink);
 }
 
+.pokemon-description{
+    font-size: 24px; /* Tamaño de fuente más grande */
+  color: #ffffff; /* Cambia el color del texto a blanco */
+  text-align: center; /* Centra el texto horizontalmente */
+  animation: shine 2s infinite;
+}
+@keyframes shine {
+    0% {
+      color: #ffffff; /* Color inicial: blanco */
+    }
+    50% {
+      color: #F31559; /* Cambia a un color de brillo (por ejemplo, amarillo) en el 50% de la animación */
+    }
+    100% {
+      color: #ffffff; /* Color final: blanco */
+    }
+  }
+  
+      
 .cart-container {
     position: absolute;
     display: none; 

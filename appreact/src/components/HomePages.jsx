@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import '../styles/styleHome.css'; //Importar los estilos CSS
+import React, { useState, useEffect } from "react";
+import '../styles/styleHome.css'; // Importar los estilos CSS
 import 'bootstrap';
 import ref2057 from '../Image/IMG_20230917_175317.jpg';
 import ref2155 from '../Image/IMG_20230917_175502.jpg';
@@ -9,12 +9,13 @@ import ref2256 from '../Image/IMG_20230917_180434.jpg';
 import ref2156 from '../Image/IMG_20230917_180619.jpg';
 import ref2059 from '../Image/IMG_20230917_180302.jpg';
 import ref2257 from '../Image/IMG_20230917_175752.jpg';
-import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png'
+import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png';
 
 const HomePage = () => {
     const [cart, setCart] = useState([]);
     const [cartCount, setCartCount] = useState(0);
     const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+    const [pokemonProducts, setPokemonProducts] = useState([]); // State para los productos Pokémon
 
     const productList = [
         {
@@ -67,6 +68,59 @@ const HomePage = () => {
         }
     ];
 
+    function ApiPokemon() {
+        function Card(props) {
+            return (
+                <div className="card">
+                    <img src={props.img} className="card-img-top" alt="..." />
+                    <div className="card-body">
+                        <h5 className="card-title">{props.title}</h5>
+                        <p className="card-text">
+                            Soon we will have our new pajamas with Pokémon designs. Look at the six new designs that we will have on our pajamas.
+                        </p>
+                        <a href="#" className="btn btn-primary">
+                            Coming soon
+                        </a>
+                    </div>
+                </div>
+            );
+        }
+
+        function NewProducts() {
+            const [Data, setData] = useState([]);
+            const [Loaded, setLoaded] = useState(false);
+            const pokemons = ["piplup", "pikachu", "lucario", "eevee", "charizard", "gengar"];
+
+            useEffect(() => {
+                if (Loaded === false) {
+                    pokemons.forEach((pokemon) => {
+                        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+                            .then((response) => response.json())
+                            .then((pokemonData) => {
+                                setData((arrayPokemon) => [
+                                    ...arrayPokemon,
+                                    <Card key={pokemonData.name} title={pokemonData.name} img={pokemonData.sprites.front_default} />,
+                                ]);
+                            });
+                    });
+
+                    setLoaded(true);
+                }
+            }, [Loaded]);
+            return (
+                <div className="newProducts">
+                    <div className="container d-flex justify-content-around">
+                        <div className="col-3">
+                            {Data.length === 0 ? "Loading" : Data}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        return <NewProducts />;
+    }
+
     const addToCart = (product) => {
         const updatedCart = [...cart, product];
         setCart(updatedCart);
@@ -88,6 +142,11 @@ const HomePage = () => {
         setPurchaseSuccess(true);
     };
 
+    useEffect(() => {
+        // Load Pokémon products here (if needed)
+
+    }, []);
+
     return (
         <div>
             {/* ... (Navbar y encabezado) */}
@@ -96,13 +155,17 @@ const HomePage = () => {
                     <a className="navbar-brand" href="#!">
                         <img src={LovelyDreamsLogo} alt="logo" width="70" height="70" />
                     </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                             <li className="nav-item"><a className="nav-link active" aria-current="page" href="#!">Home</a></li>
                             <li className="nav-item"><a className="nav-link" href="#!">About</a></li>
                             <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a className="dropdown-item" href="#!">All Products</a></li>
                                     <li><hr className="dropdown-divider" /></li>
@@ -111,25 +174,27 @@ const HomePage = () => {
                                 </ul>
                             </li>
                         </ul>
-                </div>
-                <nav className="navbar bg-body-tertiary">
-                    <div className="container-fluid">
-                      <a className="navbar-brand"></a>
-                      <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-danger" type="submit">Search</button>
-                      </form>
                     </div>
-                  </nav>
-                 </div> 
-                   <form className="d-flex">
+                    <nav className="navbar bg-body-tertiary">
+                        <div className="container-fluid">
+                            <a className="navbar-brand"></a>
+                            <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-danger" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+                <form className="d-flex">
                     <button className="btn btn-outline-danger" type="submit">
                         <i className="bi bi-cart-fill me-1"></i>
                         Cart
-                        <span id="cart-count" className="badge bg-danger text-white ms-1 rounded-pill">0</span>
+                        <span id="cart-count" className="badge bg-danger text-white ms-1 rounded-pill">{cartCount}</span>
                     </button>
                 </form>
-                {/* Carrito de compra */}
+            </nav>
+
+            {/* Carrito de compra */}
             <section className="max-height-350 cart-container">
                 <div className="max-height-350 py-5" id="cartPurchase">
                     <h2>Cart</h2>
@@ -151,35 +216,6 @@ const HomePage = () => {
                     <button className="btn-pay" onClick={finalizePurchase}>Buy <i className="fa-solid fa-bag-shopping"></i></button>
                 </div>
             </section>
-           
-           <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa-regular fa-user" style={{color: '#a6075c'}}></i></a>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#!">Account</a></li>
-                            <li><a className="dropdown-item" href="#!">Cart</a></li>
-                            <li><a className="dropdown-item" href="#!">Shopping history</a></li>
-                            <li><a className="dropdown-item" href="#!">Settings</a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item" href="#!">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-           
-           
-            </nav>
-          
-
-
-            {/* Encabezado */}
-            <header className="bg-dark py-5">
-                <div className="container px-4 px-lg-5 my-5">
-                    <div className="text-center text-white">
-                        <h1 className="display-4 fw-bolder">lovely dreams</h1>
-                        <p className="lead fw-normal text-white-50 mb-0">Sweet dreams guaranteed</p>
-                    </div>
-                </div>
-            </header>
 
             {/* Lista de productos */}
             <section className="py-5">
@@ -204,6 +240,11 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            <div>
+                <p className="pokemon-description">pokemon collaboration new designs</p>
+            <ApiPokemon />
+            </div>
 
             {/* Carrito de compra */}
             <section className="max-height-350 cart-container">
@@ -259,9 +300,3 @@ const HomePage = () => {
 }
 
 export default HomePage;
-
-
-
-
-
-

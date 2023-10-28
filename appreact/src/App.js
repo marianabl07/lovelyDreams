@@ -6,6 +6,7 @@ import Index from './components';
 import Login from './components/login';
 import Logup from './components/logup';
 import HomePage from './components/HomePages';
+import ApiPokemon from './api/ApiPokemon';
 
 function App() {
   return (
