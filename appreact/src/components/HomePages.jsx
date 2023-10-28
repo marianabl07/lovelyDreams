@@ -194,12 +194,21 @@ const HomePage = () => {
                 </form>
             </nav>
 
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">lovely dreams</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Sweet dreams guaranteed</p>
+                </div>
+                </div>
+            </header>
+
             {/* Carrito de compra */}
-            <section className="max-height-350 cart-container">
+            <section className="max-height-350 cart-container" style={{display: cart.length === 0 ? 'none' : 'block' }}>
                 <div className="max-height-350 py-5" id="cartPurchase">
                     <h2>Cart</h2>
                     <ul id="cart-list">
-                        {cart.length === 0 ? (
+                        {cart.length === 0 ? ( 
                             <li>Cart is empty</li>
                         ) : (
                             cart.map((product, index) => (
@@ -279,7 +288,7 @@ const HomePage = () => {
             </footer>
 
             {/* Modal de compra exitosa */}
-            <div className={`modal fade ${purchaseSuccess ? 'show' : ''}`} id="purchaseSuccessModal" tabIndex="-1" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true">
+            <div className={`modal fade ${purchaseSuccess ? 'show' : ''}`} id="purchaseSuccessModal" tabIndex="-1" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true" style={{ display: purchaseSuccess ? "block" : "none" }}>
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">

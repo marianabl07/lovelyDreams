@@ -135,6 +135,7 @@ updateCart();
 
 // ... (Agregar el botón "Agregar al carrito" al pie de la tarjeta)
 function updateCart() {
+    debugger;
     const cartList = document.getElementById("cart-list");
     const totalPriceElement = document.getElementById("total-price");
     const cartCountElement = document.getElementById('cart-count'); //elemento para el contador
