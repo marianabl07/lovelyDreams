@@ -11,7 +11,7 @@ import ApiPokemon from './api/ApiPokemon';
 function App() {
   return (
     <div>
-      <HomePage></HomePage>
+      <Login></Login>
     </div>
   );
 }

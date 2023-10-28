@@ -37,8 +37,11 @@ function Login() {
         emailData: email,
         passwordData: password,
       };
-      fetch("http://localhost3000", {
+      fetch("localhost/Login", {
         method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
         body: JSON.stringify(data),
       });
     }

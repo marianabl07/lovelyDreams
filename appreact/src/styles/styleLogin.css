@@ -29,6 +29,11 @@ body {
     height: 100vh;
     display: grid;
     place-items: center;
+    background-color: var(--beige);
+}
+
+.nav-tabs{
+    background-color: var(--beige);
 }
 
 .form-container {
@@ -126,7 +131,8 @@ body {
 
     .secondary-button {
         position: absolute;
-        bottom: 20px;
-        width: inherit;
+        bottom: 0px;
+        width: 200px;
+       
     }
 }
