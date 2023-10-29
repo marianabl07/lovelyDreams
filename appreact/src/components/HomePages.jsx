@@ -140,6 +140,22 @@ const HomePage = () => {
 
     const finalizePurchase = () => {
         setPurchaseSuccess(true);
+        
+        let items = [];
+        cart.reduce((total, product) => { items.push({ ref: product.name, price: product.price }) }, 0);
+
+        let purchase = {
+            products: items,
+            priceTotal: calculateTotalPrice() 
+        };
+        fetch("localhost/HomePages", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(purchase)
+
+        })
     };
 
     useEffect(() => {
@@ -288,18 +304,18 @@ const HomePage = () => {
             </footer>
 
             {/* Modal de compra exitosa */}
-            <div className={`modal fade ${purchaseSuccess ? 'show' : ''}`} id="purchaseSuccessModal" tabIndex="-1" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true" style={{ display: purchaseSuccess ? "block" : "none" }}>
+            <div className={`modal  ${purchaseSuccess ? 'fade show' : ''}`} id="purchaseSuccessModal" tabIndex="-1" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true" style={{ display: purchaseSuccess ? "block" : "none" }}>
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="purchaseSuccessModalLabel">Compra Exitosa</h5>
+                            <h5 className="modal-title" id="purchaseSuccessModalLabel">Successful purchase</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setPurchaseSuccess(false)}></button>
                         </div>
                         <div className="modal-body">
-                            ¡Gracias por tu compra! Tu pedido ha sido procesado con éxito.
+                            Thanks for your purchase! Your order has been processed successfully.
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => setPurchaseSuccess(false)}>Cerrar</button>
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => setPurchaseSuccess(false)}>Close</button>
                         </div>
                     </div>
                 </div>
