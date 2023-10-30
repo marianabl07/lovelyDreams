@@ -92,17 +92,6 @@ body {
 
 
 
-.input-name,
-.input-lastname,
-.input-email,
-.input-password,
-.input-address {
-    margin-bottom: 22px;
-
-}
-
-
-
 .primary-button {
     background-color: var(--light-pink);
     border-radius: 8px;
