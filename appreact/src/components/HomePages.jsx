@@ -10,6 +10,7 @@ import ref2156 from '../Image/IMG_20230917_180619.jpg';
 import ref2059 from '../Image/IMG_20230917_180302.jpg';
 import ref2257 from '../Image/IMG_20230917_175752.jpg';
 import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     const [cart, setCart] = useState([]);
@@ -177,7 +178,7 @@ const HomePage = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <li className="nav-item"><a className="nav-link active" aria-current="page" href="#!">Home</a></li>
+                            <li className="nav-item"><a className="nav-link active" aria-current="page" href="/">Home</a></li>
                             <li className="nav-item"><a className="nav-link" href="#!">About</a></li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"

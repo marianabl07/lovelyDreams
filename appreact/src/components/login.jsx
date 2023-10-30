@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap';
 import '../styles/styleLogin.css';
 import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png'
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -48,17 +49,17 @@ function Login() {
   };
 
   return (
-    <div> 
+    <div>
       <nav id="menu">
         <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Log in</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="homepage">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Log up</a>
+              <a class="nav-link" href="logup">Log up</a>
             </li>
           </ul>
     </nav>
@@ -104,7 +105,7 @@ function Login() {
       </div>
     </div>
     </div>
-    
+
   );
 }
 

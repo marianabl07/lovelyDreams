@@ -21,9 +21,12 @@
 body {
     margin: 0;
     font-family: 'Acme', sans-serif;
-    background-color: var(--beige);
+
 }
 
+.all {
+    background-color: var(--beige);
+}
 
 .logup {
     margin-top: 20px;
@@ -31,6 +34,7 @@ body {
     height: 100vh;
     display: grid;
     place-items: center;
+    background-color: var(--beige);
 }
 
 .form-container {
@@ -71,12 +75,30 @@ body {
     margin-bottom: 12px;
 }
 
+ #name,
+ #lastname,
+ #email,
+ #password,
+ #address,
+ #confirmPassword {
+    background-color: var(--peach);
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    font-size: var(--md);
+    padding: 6px;
+    margin-bottom: 22px;
+}
+
+
+
 .input-name,
 .input-lastname,
 .input-email,
 .input-password,
 .input-address {
     margin-bottom: 22px;
+
 }
 
 
