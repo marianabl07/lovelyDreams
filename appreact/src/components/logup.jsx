@@ -36,7 +36,7 @@ const Logup = () => {
   };
 
   const validatePassword = () => {
-    if (formData.password === formData.confirmPassword) {
+    if (formData.password == formData.confirmPassword) {
       setFormErrors((prevErrors) => ({ ...prevErrors, password: '', confirmPassword: '' }));
       return true;
     } else {
