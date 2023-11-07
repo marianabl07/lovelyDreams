@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/styleLogup.css';
 import 'bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 const expressions = {
@@ -24,6 +25,7 @@ const Logup = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState({ ...initialFormData });
   const [formSuccess, setFormSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const validateField = (inputName, value) => {
     if (expressions[inputName].test(value)) {
@@ -68,21 +70,25 @@ const Logup = () => {
     }
 
     if (valid) {
-      setFormSuccess(true);
-      setTimeout(() => {
-        setFormSuccess(false);
-        setFormData(initialFormData);
-        setFormErrors({ ...initialFormData });
-      }, 5000);
-
 
       let data = formData
-      fetch("localhost/Login", {
+      fetch("http://localhost:4000/users/logup", {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(data),
+      })
+      .then ((response) => {
+        if(response.status == 200) {
+          setFormSuccess(true);
+          setTimeout(() => {
+          setFormSuccess(false);
+          setFormData(initialFormData);
+          setFormErrors({ ...initialFormData });
+        }, 5000);
+        navigate("/login");
+        }
       });
     }
   };

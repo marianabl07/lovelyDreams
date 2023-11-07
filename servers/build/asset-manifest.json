@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e88acd36.css",
+    "main.js": "/static/js/main.03ad359d.js",
+    "static/media/pijama1.jpg": "/static/media/pijama1.55c9ab51cc9cf55a6b8e.jpg",
+    "static/media/pijama2.jpg": "/static/media/pijama2.62ebf41238b470da665c.jpg",
+    "static/media/pijama 3.jpg": "/static/media/pijama 3.cd01d0fd8acc0867f297.jpg",
+    "static/media/Lovely Dreams Logo.png": "/static/media/Lovely Dreams Logo.4e864550c07fae231037.png",
+    "static/media/inventory chart.png": "/static/media/inventory chart.21b1482e3eece1953940.png",
+    "index.html": "/index.html",
+    "main.e88acd36.css.map": "/static/css/main.e88acd36.css.map",
+    "main.03ad359d.js.map": "/static/js/main.03ad359d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e88acd36.css",
+    "static/js/main.03ad359d.js"
+  ]
+}

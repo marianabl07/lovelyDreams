@@ -1,15 +1,16 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminPage from './components/AdminPages';
 import Index from './components/index';
 import Login from './components/login';
 import Logup from './components/logup';
 import HomePage from './components/HomePages';
+import 'bootstrap';
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
          <Route path="" exact element={<Index/>} />
          <Route path="login" element={<Login/>} />
@@ -17,7 +18,7 @@ function App() {
          <Route path="homepage" element={<HomePage/>} />
          <Route path="adminpage" element={<AdminPage/>} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

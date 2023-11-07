@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from "react";
 import '../styles/styleHome.css'; // Importar los estilos CSS
 import 'bootstrap';
-import ref2057 from '../Image/IMG_20230917_175317.jpg';
-import ref2155 from '../Image/IMG_20230917_175502.jpg';
-import ref2058 from '../Image/IMG_20230917_180125.jpg';
-import ref2255 from '../Image/IMG_20230917_175953.jpg';
-import ref2256 from '../Image/IMG_20230917_180434.jpg';
-import ref2156 from '../Image/IMG_20230917_180619.jpg';
-import ref2059 from '../Image/IMG_20230917_180302.jpg';
-import ref2257 from '../Image/IMG_20230917_175752.jpg';
+// import ref2057 from '../Image/IMG_20230917_175317.jpg';
+// import ref2155 from '../Image/IMG_20230917_175502.jpg';
+// import ref2058 from '../Image/IMG_20230917_180125.jpg';
+// import ref2255 from '../Image/IMG_20230917_175953.jpg';
+// import ref2256 from '../Image/IMG_20230917_180434.jpg';
+// import ref2156 from '../Image/IMG_20230917_180619.jpg';
+// import ref2059 from '../Image/IMG_20230917_180302.jpg';
+// import ref2257 from '../Image/IMG_20230917_175752.jpg';
 import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
     const [cart, setCart] = useState([]);
     const [cartCount, setCartCount] = useState(0);
     const [purchaseSuccess, setPurchaseSuccess] = useState(false);
     const [pokemonProducts, setPokemonProducts] = useState([]); // State para los productos Pokémon
+    const navigate = useNavigate();
 
-    const productList = [
+    const [productList, setProductList] = useState([]);
+    /*const productList = [
         {
             name: 'Ref. 2057',
             price: 35000,
             image: ref2057,
             description: 'cool nightgown made of cotton'
-        },
+        }],
         {
             name: 'Ref. 2155',
             price: 39000,
@@ -67,7 +70,7 @@ const HomePage = () => {
             image: ref2257,
             description: 'cool short pajama made of cotton'
         }
-    ];
+    ];*/
 
     function ApiPokemon() {
         function Card(props) {
@@ -140,28 +143,39 @@ const HomePage = () => {
     };
 
     const finalizePurchase = () => {
-        setPurchaseSuccess(true);
-        
         let items = [];
-        cart.reduce((total, product) => { items.push({ ref: product.name, price: product.price }) }, 0);
+        cart.reduce((total, product) => { items.push({ name: product.name, price: product.price }) }, 0);
 
         let purchase = {
             products: items,
-            priceTotal: calculateTotalPrice() 
+            priceTotal: calculateTotalPrice()
         };
-        fetch("localhost/HomePages", {
+        fetch("http://localhost:4000/shopping", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify(purchase)
 
-        })
+        });
+
+        setPurchaseSuccess(true);
     };
 
     useEffect(() => {
-        // Load Pokémon products here (if needed)
+        fetch("http://localhost:4000/products", {
+            headers: {
+                "Content-Type": "application/json",
+                "autorization": localStorage.getItem("token")
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => setProductList(data))
+        .catch((e) => console.log(e));
 
+
+
+        // Load Pokémon products here (if needed)
     }, []);
 
     return (
@@ -225,7 +239,7 @@ const HomePage = () => {
                 <div className="max-height-350 py-5" id="cartPurchase">
                     <h2>Cart</h2>
                     <ul id="cart-list">
-                        {cart.length === 0 ? ( 
+                        {cart.length === 0 ? (
                             <li>Cart is empty</li>
                         ) : (
                             cart.map((product, index) => (
@@ -250,7 +264,7 @@ const HomePage = () => {
                         {productList.map((product, index) => (
                             <div key={index} className="col mb-5 products">
                                 <div className="card h-100">
-                                    <img src={product.image} alt={product.name} className="card-img-top" />
+                                    <img src={`data:image/jpg;base64,${product.image}`} alt={product.name} className="card-img-top" />
                                     <div className="card-body p-4">
                                         <h5 className="fw-bolder">Sale item</h5>
                                         <h6 className="card-title">{product.name}</h6>
@@ -273,13 +287,13 @@ const HomePage = () => {
             </div>
 
             {/* Carrito de compra */}
-            <section className="max-height-350 cart-container">
+            <section className="max-height-350 cart-container" style={{ display: cart.length > 0 ? "block" : "none" }}>
                 <div className={`max-height-350 py-5 ${cart.length > 0 ? 'show' : 'hide'}`} id="cartPurchase">
                     <h2>Cart</h2>
                     <ul id="cart-list">
                         {cart.map((product, index) => (
                             <li key={index}>
-                                <img src={product.image} alt={product.name} width="50" height="50" />
+                                <img src={`data:image/jpg;base64,${product.image}`} alt={product.name} width="50" height="50" />
                                 <span>{product.name}</span>
                                 <span className="cart-price">${product.price.toFixed(2)}</span>
                                 <button className="remove-from-cart btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>Remove</button>

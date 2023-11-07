@@ -3,11 +3,13 @@ import 'bootstrap';
 import '../styles/styleLogin.css';
 import LovelyDreamsLogo from '../Icons/Lovely Dreams Logo.png'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [warnings, setWarnings] = useState([]);
+  const navigate = useNavigate();
   // Cambiamos el estado 'warnings' a un array
 
   const handleSubmit = (e) => {
@@ -32,20 +34,33 @@ function Login() {
 
     if (open) {
       newWarnings.push('Failed login.');
-   } else {
-      newWarnings.push('Successful login.');
+    } else {
       let data = {
         emailData: email,
         passwordData: password,
       };
-      fetch("localhost/Login", {
+      fetch("http://localhost:4000/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(data),
-      });
+      })
+      .then((response) => {
+        let arrWarnings = [];
+        if(response.status != 200) {
+          arrWarnings.push('Failed login.');
+        } else {
+          arrWarnings.push('Successful login.');
+        }
+
+        setWarnings(arrWarnings);
+        return response.json();
+      })
+      .then((data) => localStorage.setItem("token", data.token));
+       navigate("/homepage");
     }
+
   };
 
   return (

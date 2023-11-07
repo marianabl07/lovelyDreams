@@ -1,34 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../styles/styleAdmin.css'
 import 'bootstrap';
-import ref2057 from '../Image/IMG_20230917_175317.jpg';
-import ref2155 from '../Image/IMG_20230917_175502.jpg';
-import ref2058 from '../Image/IMG_20230917_180125.jpg';
-import ref2255 from '../Image/IMG_20230917_175953.jpg';
-import ref2256 from '../Image/IMG_20230917_180434.jpg';
-import ref2156 from '../Image/IMG_20230917_180619.jpg';
-import ref2059 from '../Image/IMG_20230917_180302.jpg';
-import ref2257 from '../Image/IMG_20230917_175752.jpg';
+// import ref2057 from '../Image/IMG_20230917_175317.jpg';
+// import ref2155 from '../Image/IMG_20230917_175502.jpg';
+// import ref2058 from '../Image/IMG_20230917_180125.jpg';
+// import ref2255 from '../Image/IMG_20230917_175953.jpg';
+// import ref2256 from '../Image/IMG_20230917_180434.jpg';
+// import ref2156 from '../Image/IMG_20230917_180619.jpg';
+// import ref2059 from '../Image/IMG_20230917_180302.jpg';
+// import ref2257 from '../Image/IMG_20230917_175752.jpg';
 import inventoryStatus from '../Image/inventory chart.png';
 
 function AdminPage() {
   const [cartProducts, setCartProducts] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [products, setProducts] = useState({
-    "Ref. 2057": { price: 35000, available: 10, image: ref2057 },
-    "Ref. 2155": { price: 39000, available: 15, image: ref2155 },
-    "Ref. 2058": { price: 28000, available: 5, image: ref2058 },
-    "Ref. 2255": { price: 40000, available: 25, image: ref2255 },
-    "Ref. 2256": { price: 45000, available: 15, image: ref2256 },
-    "Ref. 2156": { price: 40000, available: 8, image: ref2156 },
-    "Ref. 2059": { price: 28000, available: 7, image: ref2059 },
-    "Ref. 2257": { price: 40000, available: 12, image: ref2257 },
-  });
+  const [products, setProducts] = useState({});
+  //   "Ref. 2057": { price: 35000, available: 10, image: ref2057 },
+  //   "Ref. 2155": { price: 39000, available: 15, image: ref2155 },
+  //   "Ref. 2058": { price: 28000, available: 5, image: ref2058 },
+  //   "Ref. 2255": { price: 40000, available: 25, image: ref2255 },
+  //   "Ref. 2256": { price: 45000, available: 15, image: ref2256 },
+  //   "Ref. 2156": { price: 40000, available: 8, image: ref2156 },
+  //   "Ref. 2059": { price: 28000, available: 7, image: ref2059 },
+  //   "Ref. 2257": { price: 40000, available: 12, image: ref2257 },
+  // });
 
   const updateProductQuantity = (productName, change) => {
     const productQuantitySpan = document.getElementById(`product-quantity-${productName}`);
-    if (productQuantitySpan) { 
+    if (productQuantitySpan) {
       const updatedQuantity = products[productName].available;
       productQuantitySpan.textContent = `${updatedQuantity} available`;
     }
@@ -94,6 +94,19 @@ function AdminPage() {
     setTotalPrice(total);
   };
 
+  useEffect(() => {
+    fetch("http://localhost:4000/libraryProducts", {
+      headers: {
+          "Content-Type": "application/json",
+          "autorization": localStorage.getItem("token")
+      }
+  })
+    .then((response) => response.json())
+    .then((data) => setProducts(data))
+    .catch((e) => console.log(e));
+
+  }, []);
+
   return (
   <div>
       <nav className="navbar navbar-dark bg-dark fixed-top">
@@ -153,7 +166,7 @@ function AdminPage() {
                               <button className="add-to-cart" onClick={() => updateCart(productName, 1)}>
                                 Add to cart
                               </button>
-                              <img src={products[productName].image} alt={productName} />
+                              <img src={`data:image/jpg;base64,${products[productName].image}`} alt={productName} />
                             </li>
                           )
                         ))}
@@ -181,7 +194,7 @@ function AdminPage() {
                               >
                                 Remove from cart
                               </button>
-                              <img src={products[productName].image} alt={productName} />
+                              <img src={`data:image/jpg;base64,${products[productName].image}`} alt={productName} />
                             </li>
                           )
                         ))}
